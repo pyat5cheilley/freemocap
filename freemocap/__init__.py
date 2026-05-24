@@ -15,8 +15,9 @@ __url__ = "https://github.com/freemocap/freemocap"
 from freemocap.system.logging.configure_logging import configure_logging
 
 # Configure default logging on package import
-# Personal note: using WARNING level by default to reduce noise during my experiments
-configure_logging(log_level="WARNING")
+# Personal note: switched to DEBUG level so I can trace issues more easily
+# while working through the codebase - change back to WARNING for normal use
+configure_logging(log_level="DEBUG")
 
 __all__ = [
     "__version__",
