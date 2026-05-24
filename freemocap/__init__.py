@@ -1,18 +1,27 @@
-"""A free and open source markerless motion capture system for everyone 💀✨"""
+"""FreeMoCap - Free Motion Capture.
 
-__author__ = """Skelly FreeMoCap"""
-__email__ = "info@freemocap.org"
-__version__ = "v1.8.2"
-__description__ = "A free and open source markerless motion capture system for everyone 💀✨"
+A free and open-source markerless motion capture system.
+This package provides tools for recording, processing, and analyzing
+human motion data using computer vision and machine learning techniques.
+"""
 
-__package_name__ = "freemocap"
-__repo_url__ = f"https://github.com/freemocap/{__package_name__}/"
-__repo_issues_url__ = f"{__repo_url__}issues"
+__version__ = "1.0.0"
+__author__ = "FreeMoCap Contributors"
+__email__ = "support@freemocap.org"
+__license__ = "AGPLv3"
+__description__ = "A free and open-source markerless motion capture system"
+__url__ = "https://github.com/freemocap/freemocap"
 
-from freemocap.system.logging.configure_logging import configure_logging, LogLevel
+from freemocap.system.logging.configure_logging import configure_logging
 
-configure_logging(LogLevel.TRACE)
-import logging
+# Configure default logging on package import
+configure_logging()
 
-logger = logging.getLogger(__name__)
-logger.info(f"Initializing {__package_name__} package, version: {__version__}, from file: {__file__}")
+__all__ = [
+    "__version__",
+    "__author__",
+    "__email__",
+    "__license__",
+    "__description__",
+    "__url__",
+]
