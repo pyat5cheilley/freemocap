@@ -17,7 +17,11 @@ from freemocap.system.logging.configure_logging import configure_logging
 # Configure default logging on package import
 # Personal note: switched to DEBUG level so I can trace issues more easily
 # while working through the codebase - change back to WARNING for normal use
-configure_logging(log_level="DEBUG")
+# TODO: consider reading log level from an env variable (e.g. FREEMOCAP_LOG_LEVEL)
+#       so I don't have to keep editing this file manually
+import os
+_log_level = os.environ.get("FREEMOCAP_LOG_LEVEL", "DEBUG")
+configure_logging(log_level=_log_level)
 
 __all__ = [
     "__version__",
