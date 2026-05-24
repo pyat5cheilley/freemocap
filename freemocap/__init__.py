@@ -23,6 +23,11 @@ import os
 _log_level = os.environ.get("FREEMOCAP_LOG_LEVEL", "DEBUG")
 configure_logging(log_level=_log_level)
 
+# Personal note: log the resolved level at startup so it's obvious which
+# level is active when running tests or scripts
+import logging
+logging.getLogger(__name__).debug("freemocap logging initialised at level: %s", _log_level)
+
 __all__ = [
     "__version__",
     "__author__",
