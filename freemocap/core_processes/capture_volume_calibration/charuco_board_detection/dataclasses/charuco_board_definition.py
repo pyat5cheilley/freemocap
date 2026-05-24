@@ -21,10 +21,17 @@ class CharucoBoardDefinition:
         black_square_side_length_mm: Side length of each black square in millimeters.
         aruco_marker_length_mm: Side length of each ArUco marker in millimeters.
         aruco_marker_dict: The ArUco dictionary used to generate markers.
+
+    Note:
+        Default board dimensions (7x5 squares, 30mm squares) match the standard
+        FreeMoCap calibration board PDF. If you printed yours at a different size,
+        adjust black_square_side_length_mm and aruco_marker_length_mm accordingly.
+        For a board printed at 80% scale, multiply both lengths by 0.8.
     """
 
     number_of_squares_width: int = 7
     number_of_squares_height: int = 5
+    # Using slightly larger squares than default for better detection at distance
     black_square_side_length_mm: float = 30.0
     aruco_marker_length_mm: float = 23.0
     aruco_marker_dict_id: int = cv2.aruco.DICT_4X4_250
@@ -67,25 +74,10 @@ class CharucoBoardDefinition:
 
         Args:
             pixels_per_mm: Resolution of the output image in pixels per millimeter.
+                           Default is 10.0 px/mm (100 DPI equivalent). Increase to
+                           20.0 for a higher-resolution printable image.
 
         Returns:
             A grayscale NumPy array representing the board image.
         """
-        width_mm, height_mm = self.board_dimensions_mm
-        image_width_px = int(width_mm * pixels_per_mm)
-        image_height_px = int(height_mm * pixels_per_mm)
-        board_image = self.board.generateImage(
-            outSize=(image_width_px, image_height_px),
-            marginSize=0,
-            borderBits=1,
-        )
-        return board_image
-
-    def __repr__(self) -> str:
-        return (
-            f"CharucoBoardDefinition("
-            f"squares={self.number_of_squares_width}x{self.number_of_squares_height}, "
-            f"square_side={self.black_square_side_length_mm}mm, "
-            f"marker_side={self.aruco_marker_length_mm}mm, "
-            f"corners={self.number_of_charuco_corners})"
-        )
+        width_mm, h
