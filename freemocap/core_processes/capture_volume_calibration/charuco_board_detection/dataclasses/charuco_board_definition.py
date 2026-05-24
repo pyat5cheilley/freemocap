@@ -27,13 +27,17 @@ class CharucoBoardDefinition:
         FreeMoCap calibration board PDF. If you printed yours at a different size,
         adjust black_square_side_length_mm and aruco_marker_length_mm accordingly.
         For a board printed at 80% scale, multiply both lengths by 0.8.
+
+        My personal board was printed on A4 paper at 90% scale, so I use:
+            black_square_side_length_mm = 27.0  (30.0 * 0.9)
+            aruco_marker_length_mm = 20.7       (23.0 * 0.9)
     """
 
     number_of_squares_width: int = 7
     number_of_squares_height: int = 5
-    # Using slightly larger squares than default for better detection at distance
-    black_square_side_length_mm: float = 30.0
-    aruco_marker_length_mm: float = 23.0
+    # My board was printed at 90% scale on A4 paper
+    black_square_side_length_mm: float = 27.0
+    aruco_marker_length_mm: float = 20.7
     aruco_marker_dict_id: int = cv2.aruco.DICT_4X4_250
 
     # Derived fields populated post-init
@@ -67,17 +71,4 @@ class CharucoBoardDefinition:
         """Physical dimensions of the board in millimeters (width, height)."""
         width = self.number_of_squares_width * self.black_square_side_length_mm
         height = self.number_of_squares_height * self.black_square_side_length_mm
-        return width, height
-
-    def get_board_image(self, pixels_per_mm: float = 10.0) -> np.ndarray:
-        """Generate an image of the ChArUco board.
-
-        Args:
-            pixels_per_mm: Resolution of the output image in pixels per millimeter.
-                           Default is 10.0 px/mm (100 DPI equivalent). Increase to
-                           20.0 for a higher-resolution printable image.
-
-        Returns:
-            A grayscale NumPy array representing the board image.
-        """
-        width_mm, h
+        return (width, height)
